@@ -19,7 +19,7 @@ resource "vault_auth_backend" "github_project" {
 data "template_file" "github_org" {
     template = "${file("${path.module}/templates/github_org.json.tpl")}"
     vars = {
-        organization = "${var.github_org}"
+        organization = "${var.organization}"
     }
 }
 resource "vault_generic_secret" "github_org" {
