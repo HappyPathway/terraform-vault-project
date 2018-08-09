@@ -8,7 +8,7 @@ data "template_file" "project_admin_policy" {
 
 resource "vault_policy" "project_admin_policy" {
   name   = "${var.project}-admin"
-  policy = "${data.template_file.project_policy.rendered}"
+  policy = "${data.template_file.project_admin_policy.rendered}"
 }
 
 data "template_file" "project_dev_policy" {
@@ -21,7 +21,7 @@ data "template_file" "project_dev_policy" {
 
 resource "vault_policy" "project_dev_policy" {
   name   = "${var.project}-dev"
-  policy = "${data.template_file.project_policy.rendered}"
+  policy = "${data.template_file.project_dev_policy.rendered}"
 }
 
 data "template_file" "github_admin_team" {
