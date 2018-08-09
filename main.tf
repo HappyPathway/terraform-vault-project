@@ -1,17 +1,30 @@
-data "template_file" "project_policy" {
-  template = "${file("${path.module}/templates/policy.hcl.tpl")}"
+data "template_file" "project_admin_policy" {
+  template = "${file("${path.module}/templates/policy-admin.hcl.tpl")}"
 
   vars {
     project = "${var.project}"
   }
 }
 
-resource "vault_policy" "project_policy" {
+resource "vault_policy" "project_admin_policy" {
   name   = "${var.project}-admin"
   policy = "${data.template_file.project_policy.rendered}"
 }
 
-data "template_file" "github_teams" {
+data "template_file" "project_dev_policy" {
+  template = "${file("${path.module}/templates/policy-dev.hcl.tpl")}"
+
+  vars {
+    project = "${var.project}"
+  }
+}
+
+resource "vault_policy" "project_dev_policy" {
+  name   = "${var.project}-dev"
+  policy = "${data.template_file.project_policy.rendered}"
+}
+
+data "template_file" "github_admin_team" {
     template = "${file("${path.module}/templates/github_teams.json.tpl")}"
     vars = {
         vault_policy = "${var.project}-admin"
@@ -20,6 +33,18 @@ data "template_file" "github_teams" {
 
 resource "vault_generic_secret" "github_teams" {
   path      = "auth/github/map/teams/${var.project}-admin"
-  data_json = "${data.template_file.github_teams.rendered}"
+  data_json = "${data.template_file.github_admin_team.rendered}"
 }
 
+
+data "template_file" "github_dev_team" {
+    template = "${file("${path.module}/templates/github_teams.json.tpl")}"
+    vars = {
+        vault_policy = "${var.project}-dev"
+    }
+}
+
+resource "vault_generic_secret" "github_dev_team" {
+  path      = "auth/github/map/teams/${var.project}-dev"
+  data_json = "${data.template_file.github_dev_team.rendered}"
+}
