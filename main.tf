@@ -31,7 +31,7 @@ data "template_file" "github_admin_team" {
     }
 }
 
-resource "vault_generic_secret" "github_teams" {
+resource "vault_generic_secret" "github_admin_team" {
   path      = "auth/github/map/teams/${var.project}-admin"
   data_json = "${data.template_file.github_admin_team.rendered}"
 }
@@ -49,8 +49,8 @@ resource "vault_generic_secret" "github_dev_team" {
   data_json = "${data.template_file.github_dev_team.rendered}"
 }
 
-resource "vault_mount" "credentials" {
-  path = "${var.project}/credentials"
+resource "vault_mount" "secrets" {
+  path = "${var.project}/secrets"
   type = "generic"
-  description = "Static Credentials Mount for ${var.project}"
+  description = "Static Secrets Mount for ${var.project}"
 }
