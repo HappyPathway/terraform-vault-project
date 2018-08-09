@@ -48,3 +48,9 @@ resource "vault_generic_secret" "github_dev_team" {
   path      = "auth/github/map/teams/${var.project}-dev"
   data_json = "${data.template_file.github_dev_team.rendered}"
 }
+
+resource "vault_mount" "credentials" {
+  path = "${var.project}/credentials"
+  type = "generic"
+  description = "Static Credentials Mount for ${var.project}"
+}
