@@ -1,0 +1,3 @@
+{
+    "value": "${vault_policy}"
+}
