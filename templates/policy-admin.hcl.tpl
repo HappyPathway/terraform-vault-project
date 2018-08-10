@@ -2,6 +2,9 @@ path "${project}/*" {
   capabilities = ["read", "list", "update", "create", "delete"]
 }
 
+path "sys/mounts" {
+  capabilities = ["list"]
+}
 
 path "sys/mounts/*" {
   capabilities = ["update", "create", "update", "delete", "list"]
