@@ -6,3 +6,7 @@ path "${project}/*" {
 path "sys/mounts/*" {
   capabilities = ["update", "create"]
 }
+
+path "auth/token/create" {
+  capabilities = ["update", "create", "read"]
+}
