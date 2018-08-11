@@ -3,11 +3,11 @@ path "${project}/*" {
 }
 
 path "sys/mounts" {
-  capabilities = ["list"]
+  capabilities = ["list", "read", "create", "update"]
 }
 
 path "sys/mounts/*" {
-  capabilities = ["update", "create", "update", "delete", "list"]
+  capabilities = ["read", "create", "update", "delete", "list"]
 }
 
 path "auth/token/create" {
