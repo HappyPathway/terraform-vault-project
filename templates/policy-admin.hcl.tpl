@@ -11,5 +11,5 @@ path "sys/mounts/*" {
 }
 
 path "auth/token/create" {
-  capabilities = ["update", "create", "read"]
+  capabilities = ["update", "create", "read", "sudo"]
 }
