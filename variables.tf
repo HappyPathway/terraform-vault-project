@@ -12,3 +12,8 @@ variable "github_organization" {
     type = "string"
     description = "Github Organization"
 }
+
+variable "repo_admin" {
+  type = "string"
+  description = "Admin Github User Account. Will have admin rights for all code and secrets on team."
+}

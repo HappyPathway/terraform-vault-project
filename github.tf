@@ -14,3 +14,9 @@ resource "github_team" "dev_team" {
   description = "${var.project} Developers Team"
   privacy     = "closed"
 }
+
+resource "github_team_membership" "some_team_membership" {
+  team_id  = "${github_team.admin_team.id}"
+  username = "${var.repo_admin}"
+  role     = "maintainer"
+}
